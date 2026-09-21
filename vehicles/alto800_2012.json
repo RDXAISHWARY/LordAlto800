@@ -1,0 +1,6 @@
+{
+  "id":"maruti-alto-800-2012-petrol", "displayName":"ALTO 800", "manufacturer":"Maruti Suzuki", "model":"Alto 800", "year":2012,
+  "engine":"796 cc petrol", "transmission":"Manual", "market":"India",
+  "units":{"speed":"km/h","distance":"km","temperature":"°C","pressure":"kPa","economy":"km/L","voltage":"V"},
+  "polling":{"fast":200,"normal":1000,"slow":5000}, "display":{"redlineRpm":6500,"tempWarningC":105,"tempCriticalC":115}
+}

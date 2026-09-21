@@ -1,0 +1,5 @@
+const DB='alto-obd';
+export async function saveTrip(trip){const db=await open();return new Promise((resolve,reject)=>{const r=db.transaction('trips','readwrite').objectStore('trips').add(trip);r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});}
+export async function listTrips(){const db=await open();return new Promise((resolve,reject)=>{const r=db.transaction('trips').objectStore('trips').getAll();r.onsuccess=()=>resolve(r.result.reverse());r.onerror=()=>reject(r.error);});}
+function open(){return new Promise((resolve,reject)=>{const r=indexedDB.open(DB,1);r.onupgradeneeded=()=>r.result.createObjectStore('trips',{keyPath:'id',autoIncrement:true});r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});}
+export function exportData(data,format){const payload=format==='json'?JSON.stringify(data,null,2):Object.keys(data[0]||{}).join(',')+'\n'+data.map(x=>Object.values(x).join(',')).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([payload],{type:format==='json'?'application/json':'text/csv'}));a.download=`alto-trips.${format}`;a.click();URL.revokeObjectURL(a.href);}
